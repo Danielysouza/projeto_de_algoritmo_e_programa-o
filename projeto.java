@@ -1,0 +1,54 @@
+import java.util.Scanner;
+
+public class exercicio2 {
+
+    public static void main(String[] args) {
+        Scanner lc = new Scanner(System.in);
+
+        System.out.println("Digite o valor da sua compra: ");
+        double a = lc.nextDouble();
+
+        double[] valores = {100, 50, 20, 10, 5, 2, 1, 0.50, 0.25, 0.10, 0.05, 0.01};
+        int[] quantidades = new int[valores.length];
+        int i = 0;
+
+        while (a <= 0.01) {
+            System.out.println("erro, tente digitar um novo valor da compra: ");
+            a = lc.nextDouble();
+        }
+
+        System.out.println("Digite o valor do pagamento: ");
+        double b = lc.nextDouble();
+
+        while (b < a) { 
+            System.out.println("erro, tente digitar outro valor para o pagamneto");
+            b = lc.nextDouble();
+        }
+
+  
+        double troco = b - a;
+        System.out.printf("Troco total: R$ %.2f%n%n", troco);
+
+        while (i < valores.length) {
+            if (troco >= valores[i]) {
+                quantidades[i] = (int) (troco / valores[i]);
+                troco = troco % valores[i];
+                troco = Math.round(troco * 100.0) / 100.0;
+            }
+            i++;
+        }
+
+        System.out.println("Detalhamento do troco:");
+        for (int j = 0; j < valores.length; j++) {
+            if (quantidades[j] > 0) {
+                if (valores[j] >= 2.0) {
+                    System.out.println(quantidades[j] + " nota(s) de R$ " + valores[j]);
+                } else {
+                    System.out.println(quantidades[j] + " moeda(s) de R$ " + valores[j]);
+                }
+            }
+        }
+
+        lc.close();
+    }
+}
